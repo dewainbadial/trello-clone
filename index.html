@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trello Clone</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-left">
+      <span class="logo"><i class="fab fa-trello"></i> TrelloClone</span>
+    </div>
+    <div class="header-center">
+      <span id="board-title" class="board-title" contenteditable="true" spellcheck="false">My Board</span>
+    </div>
+    <div class="header-right">
+      <button class="btn-icon" id="add-list-btn" title="Add Column"><i class="fas fa-plus"></i> Add List</button>
+    </div>
+  </header>
+
+  <!-- BOARD -->
+  <main class="board" id="board">
+    <!-- Columns rendered by JS -->
+  </main>
+
+  <!-- ADD LIST PANEL -->
+  <div class="add-list-panel hidden" id="add-list-panel">
+    <input type="text" id="new-list-input" placeholder="Enter list name..." maxlength="60" />
+    <div class="panel-actions">
+      <button class="btn-primary" id="confirm-add-list">Add List</button>
+      <button class="btn-ghost" id="cancel-add-list"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+
+  <!-- CARD MODAL -->
+  <div class="modal-overlay hidden" id="card-modal-overlay">
+    <div class="card-modal" id="card-modal">
+      <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
+
+      <div class="modal-header">
+        <i class="fas fa-credit-card modal-icon"></i>
+        <h2 id="modal-card-title" contenteditable="true" spellcheck="false">Card Title</h2>
+        <span class="modal-list-name">in list: <strong id="modal-list-name">List</strong></span>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-main">
+
+          <!-- Labels -->
+          <div class="modal-section">
+            <h3><i class="fas fa-tag"></i> Labels</h3>
+            <div class="labels-container" id="modal-labels"></div>
+            <div class="label-picker" id="label-picker">
+              <span class="label-color" data-color="#61bd4f" style="background:#61bd4f"></span>
+              <span class="label-color" data-color="#f2d600" style="background:#f2d600"></span>
+              <span class="label-color" data-color="#ff9f1a" style="background:#ff9f1a"></span>
+              <span class="label-color" data-color="#eb5a46" style="background:#eb5a46"></span>
+              <span class="label-color" data-color="#c377e0" style="background:#c377e0"></span>
+              <span class="label-color" data-color="#0079bf" style="background:#0079bf"></span>
+            </div>
+          </div>
+
+          <!-- Due Date -->
+          <div class="modal-section">
+            <h3><i class="fas fa-calendar"></i> Due Date</h3>
+            <input type="date" id="modal-due-date" class="date-input" />
+          </div>
+
+          <!-- Description -->
+          <div class="modal-section">
+            <h3><i class="fas fa-align-left"></i> Description</h3>
+            <textarea id="modal-description" placeholder="Add a description..." rows="4"></textarea>
+          </div>
+
+          <!-- Checklist -->
+          <div class="modal-section">
+            <h3><i class="fas fa-check-square"></i> Checklist</h3>
+            <div id="checklist-items"></div>
+            <div class="add-checklist-item">
+              <input type="text" id="new-checklist-input" placeholder="Add item..." />
+              <button class="btn-primary btn-sm" id="add-checklist-btn">Add</button>
+            </div>
+          </div>
+
+          <!-- Attachments -->
+          <div class="modal-section">
+            <h3><i class="fas fa-paperclip"></i> Attachments</h3>
+            <div id="attachments-list"></div>
+            <label class="btn-ghost btn-sm attach-label">
+              <i class="fas fa-upload"></i> Upload File
+              <input type="file" id="attachment-input" class="hidden" />
+            </label>
+            <small class="gcs-note" id="gcs-note"></small>
+          </div>
+
+        </div>
+
+        <div class="modal-sidebar">
+          <button class="sidebar-action" id="modal-delete-card"><i class="fas fa-trash"></i> Delete Card</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GCS CONFIG (owner fills in API details) -->
+  <script>
+    window.GCS_CONFIG = {
+      bucketName: 'trello-clone-attachments',
+      // apiKey will be injected by owner — see MASTER.md
+      apiKey: '',
+      enabled: false
+    };
+  </script>
+
+  <script src="app.js"></script>
+</body>
+</html>
