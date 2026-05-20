@@ -391,7 +391,7 @@ function renderModalLabels(card) {
   const container = document.getElementById('modal-labels');
   container.innerHTML = card.labels.map(color =>
     '<span class="modal-label" style="background:' + color + '" data-color="' + color + '">' +
-    '<span class="remove-label" onclick="removeLabel('' + color + '')">x</span></span>'
+    '<span class="remove-label" onclick="removeLabel(this.parentElement.dataset.color)">x</span></span>'
   ).join('');
 }
 function removeLabel(color) {
